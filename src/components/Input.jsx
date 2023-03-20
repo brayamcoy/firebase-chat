@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
-import Img from "../img/img.png";
-import Attach from "../img/attach.png";
+import React, { useContext, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
+import * as FaIcons from 'react-icons/fa';
 import {
   arrayUnion,
   doc,
@@ -17,6 +16,8 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 const Input = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
+
+  const fileRef = useRef(null);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -82,15 +83,16 @@ const Input = () => {
         value={text}
       />
       <div className="send">
-        <img src={Attach} alt="" />
+      <FaIcons.FaPaperclip onClick={() => fileRef.current.click()} />
         <input
           type="file"
           style={{ display: "none" }}
           id="file"
+          ref={fileRef}
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="file">
-          <img src={Img} alt="" />
+          <FaIcons.FaImage />
         </label>
         <button onClick={handleSend}>Send</button>
       </div>

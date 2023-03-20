@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
+import Zoom from "react-medium-image-zoom";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 
@@ -30,7 +31,15 @@ const Message = ({ message }) => {
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
-        {message.img && <img src={message.img} alt="" />}
+        {message.img && (
+          <Zoom>
+            <img
+              alt={message.img}
+              src={message.img}
+              width="500"
+            />
+          </Zoom>
+        )}
       </div>
     </div>
   );

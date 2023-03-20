@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
+import { FaSearch } from "react-icons/fa";
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
@@ -79,9 +80,10 @@ const Search = () => {
   return (
     <div className="search">
       <div className="searchForm">
+        <FaSearch />
         <input
           type="text"
-          placeholder="Find a user"
+          placeholder="Search users"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
